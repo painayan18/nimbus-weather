@@ -11,7 +11,7 @@ export interface WeatherCondition {
 }
 
 export interface WeatherData {
-  coor: Coordinates;
+  coord: Coordinates;
   weather: WeatherCondition[];
   main: {
     temp: number;
@@ -28,7 +28,7 @@ export interface WeatherData {
   sys: {
     sunrise: number;
     sunset: number;
-    country: number;
+    country: string;
   };
   name: string;
   dt: number;
