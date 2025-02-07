@@ -3,6 +3,11 @@ import { WeatherSkeleton } from "@/components/loading-skeleton";
 import { AlertTriangle, MapPin, RefreshCw } from "lucide-react";
 import { useGeolocation } from "@/hooks/use-geolocation.ts";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert.tsx";
+import {
+  useForecastQuery,
+  useReverseGeocodeQuery,
+  useWeatherQuery,
+} from "@/hooks/use-weather.ts";
 
 const WeatherDashboard = () => {
   const {
@@ -12,12 +17,16 @@ const WeatherDashboard = () => {
     isLoading: locationLoading,
   } = useGeolocation();
 
-  console.log(coordinates);
+  const weatherQuery = useWeatherQuery(coordinates);
+  const forecastQuery = useForecastQuery(coordinates);
+  const locationQuery = useReverseGeocodeQuery(coordinates);
 
   const handleRefresh = () => {
     getLocation();
     if (coordinates) {
-      // reload weather data
+      weatherQuery.refetch();
+      forecastQuery.refetch();
+      locationQuery.refetch();
     }
   };
 
