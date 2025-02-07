@@ -61,10 +61,8 @@ const CitySearch = () => {
           {query.length > 2 && !isLoading && (
             <CommandEmpty>No cities found.</CommandEmpty>
           )}
-          {/*<CommandGroup heading="Favorites">*/}
-          {/*  <CommandItem>Calendar</CommandItem>*/}
-          {/*</CommandGroup>*/}
 
+          {/* SEARCH HISTORY */}
           {history.length > 0 && (
             <>
               <CommandSeparator />
@@ -92,11 +90,11 @@ const CitySearch = () => {
                       <span>{location.name}</span>
                       {location.state && (
                         <span className="text-sm text-muted-foreground">
-                          , {location.state}
+                          {location.state}
                         </span>
                       )}
                       <span className="text-sm text-muted-foreground">
-                        , {location.country}
+                        {location.country}
                       </span>
                       <span className="ml-auto text-xs text-muted-foreground">
                         {format(location.searchedAt, "MMM d, h:mm a")}
@@ -109,6 +107,8 @@ const CitySearch = () => {
           )}
 
           <CommandSeparator />
+
+          {/* SUGGESTIONS */}
 
           {locations && locations.length > 0 && (
             <CommandGroup heading="Suggestions">
@@ -128,11 +128,11 @@ const CitySearch = () => {
                     <span>{location.name}</span>
                     {location.state && (
                       <span className="text-sm text-muted-foreground">
-                        , {location.state}
+                        {location.state}
                       </span>
                     )}
                     <span className="text-sm text-muted-foreground">
-                      , {location.country}
+                      {location.country}
                     </span>
                   </CommandItem>
                 );
