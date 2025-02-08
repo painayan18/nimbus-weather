@@ -1,4 +1,4 @@
-import { ForecastData } from "@/api/types.ts";
+import type { ForecastData } from "@/api/types";
 import { format } from "date-fns";
 import {
   Card,
@@ -7,7 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card.tsx";
 import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
-import { API_CONFIG } from "@/api/config.ts";
 
 interface WeatherForecastProps {
   data: ForecastData;
@@ -57,8 +56,11 @@ const WeatherForecast = ({ data }: WeatherForecastProps) => {
     {} as Record<string, DailyForecast>,
   );
 
-  const nextDays = Object.values(dailyForecasts).slice(0, 6);
-  const formatTemp = (temp: number) => `${Math.round(temp)}º`;
+  // Get next 5 days
+  const nextDays = Object.values(dailyForecasts).slice(1, 6);
+
+  // Format temperature
+  const formatTemp = (temp: number) => `${Math.round(temp)}°`;
 
   return (
     <Card>
@@ -67,50 +69,43 @@ const WeatherForecast = ({ data }: WeatherForecastProps) => {
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          {nextDays.map((day) => {
-            return (
-              <div
-                key={day.date}
-                className="grid grid-cols-3 items-center gap-4 rounded-lg border p-4"
-              >
-                <div className="">
-                  <p className="font-medium">
-                    {format(new Date(day.date * 1000), "EEE, MMM, d")}
-                  </p>
-                  <p className="text-sm text-muted-foreground capitalize">
-                    {day.weather.description}
-                  </p>
-                </div>
-
-                <div className="flex justify-center gap-4">
-                  <span className="flex items-center text-blue-500">
-                    <ArrowDown className="mr-1 w-4 h-4" />
-                    {formatTemp(day.temp_min)}
-                  </span>
-                  <span className="flex items-center text-red-500">
-                    <ArrowUp className="mr-1 w-4 h-4" />
-                    {formatTemp(day.temp_max)}
-                  </span>
-                </div>
-
-                <div className="flex justify-end gap-4">
-                  <span className="flex items-center gap-1">
-                    <Droplets className="h-4 w-4 text-blue-500" />
-                    <span className="text-sm">{day.humidity}%</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Wind className="h-4 w-4 text-blue-500" />
-                    <span className="text-sm">
-                      {day.wind}{" "}
-                      {API_CONFIG.DEFAULT_PARAMS.units === "metric"
-                        ? "KM/H"
-                        : "MPH"}
-                    </span>
-                  </span>
-                </div>
+          {nextDays.map((day) => (
+            <div
+              key={day.date}
+              className="grid grid-cols-3 items-center gap-4 rounded-lg border p-4"
+            >
+              <div>
+                <p className="font-medium">
+                  {format(new Date(day.date * 1000), "EEE, MMM d")}
+                </p>
+                <p className="text-sm text-muted-foreground capitalize">
+                  {day.weather.description}
+                </p>
               </div>
-            );
-          })}
+
+              <div className="flex justify-center gap-4">
+                <span className="flex items-center text-blue-500">
+                  <ArrowDown className="mr-1 h-4 w-4" />
+                  {formatTemp(day.temp_min)}
+                </span>
+                <span className="flex items-center text-red-500">
+                  <ArrowUp className="mr-1 h-4 w-4" />
+                  {formatTemp(day.temp_max)}
+                </span>
+              </div>
+
+              <div className="flex justify-end gap-4">
+                <span className="flex items-center gap-1">
+                  <Droplets className="h-4 w-4 text-blue-500" />
+                  <span className="text-sm">{day.humidity}%</span>
+                </span>
+                <span className="flex items-center gap-1">
+                  <Wind className="h-4 w-4 text-blue-500" />
+                  <span className="text-sm">{day.wind} MPH</span>
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </CardContent>
     </Card>
