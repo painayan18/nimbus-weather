@@ -43,17 +43,17 @@ export function HourlyTemperature({ data }: HourlyTemperatureProps) {
       </CardHeader>
       <CardContent>
         <div className="h-[200px] w-full">
-          <ResponsiveContainer width={"100%"} height={"100%"}>
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
               <XAxis
                 dataKey="time"
-                stroke="#88888"
+                stroke="#888888"
                 fontSize={12}
                 tickLine={false}
                 axisLine={false}
               />
               <YAxis
-                stroke="#88888"
+                stroke="#888888"
                 fontSize={12}
                 tickLine={false}
                 axisLine={false}
@@ -72,7 +72,7 @@ export function HourlyTemperature({ data }: HourlyTemperatureProps) {
                               Actual
                             </span>
                             <span className="font-bold">
-                              {payload[0].value}º
+                              {payload[0].value}°
                             </span>
                           </div>
 
@@ -81,7 +81,7 @@ export function HourlyTemperature({ data }: HourlyTemperatureProps) {
                               Feels like
                             </span>
                             <span className="font-bold">
-                              {payload[1].value}º
+                              {payload[1].value}°
                             </span>
                           </div>
                         </div>
