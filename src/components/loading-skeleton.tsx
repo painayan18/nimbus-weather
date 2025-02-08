@@ -14,3 +14,5 @@ export function WeatherSkeleton() {
     </div>
   );
 }
+
+export default WeatherSkeleton;
