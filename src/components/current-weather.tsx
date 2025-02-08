@@ -1,7 +1,6 @@
-import { GeocodingResponse, WeatherData } from "@/api/types.ts";
-import { Card, CardContent } from "@/components/ui/card.tsx";
+import type { WeatherData, GeocodingResponse } from "@/api/types";
+import { Card, CardContent } from "./ui/card";
 import { ArrowDown, ArrowUp, Droplets, Wind } from "lucide-react";
-import { API_CONFIG } from "@/api/config.ts";
 
 interface CurrentWeatherProps {
   data: WeatherData;
@@ -15,7 +14,8 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
     wind: { speed },
   } = data;
 
-  const formatTemp = (temp: number) => `${Math.round(temp)}º`;
+  // Format temperature
+  const formatTemp = (temp: number) => `${Math.round(temp)}°`;
 
   return (
     <Card className="overflow-hidden">
@@ -23,8 +23,8 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-4">
             <div className="space-y-2">
-              <div className="display-flex items-end gap-1">
-                <h2 className="text-2xl font-bold tracking-title">
+              <div className="flex items-center">
+                <h2 className="text-2xl font-bold tracking-tight">
                   {locationName?.name}
                 </h2>
                 {locationName?.state && (
@@ -68,15 +68,10 @@ export function CurrentWeather({ data, locationName }: CurrentWeatherProps) {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Wind className="h4 w4 text-blue-500" />
+                <Wind className="h-4 w-4 text-blue-500" />
                 <div className="space-y-0.5">
                   <p className="text-sm font-medium">Wind Speed</p>
-                  <p className="text-sm text-muted-foreground">
-                    {speed}{" "}
-                    {API_CONFIG.DEFAULT_PARAMS.units === "metric"
-                      ? "KM/H"
-                      : "MPH"}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{speed} MPH</p>
                 </div>
               </div>
             </div>
