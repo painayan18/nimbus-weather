@@ -69,12 +69,13 @@ export function useGeolocation() {
     );
   };
 
+  // Get location on component mount
   useEffect(() => {
     getLocation();
   }, []);
 
   return {
     ...locationData,
-    getLocation,
+    getLocation, // Expose method to manually refresh location
   };
 }

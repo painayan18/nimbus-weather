@@ -57,7 +57,7 @@ export function HourlyTemperature({ data }: HourlyTemperatureProps) {
                 fontSize={12}
                 tickLine={false}
                 axisLine={false}
-                tickFormatter={(value) => `${value}º`}
+                tickFormatter={(value) => `${value}°`}
               />
 
               {/*tooltip*/}
