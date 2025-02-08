@@ -52,7 +52,7 @@ export interface ForecastData {
 
 export interface GeocodingResponse {
   name: string;
-  local_name?: Record<string, string>;
+  local_names?: Record<string, string>;
   lat: number;
   lon: number;
   country: string;
